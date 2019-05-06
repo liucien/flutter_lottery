@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../common/event_bus.dart';
 
 class NearestNum extends StatefulWidget {
   NearestNum({Key key}) : super(key: key);
@@ -8,10 +9,17 @@ class NearestNum extends StatefulWidget {
 
 class _NearestNumState extends State<NearestNum> {
   List nums;
+  var lottery;
   @override
   void initState() {
     super.initState();
-    nums = ["03", "04", "10", "16", "32", "04", "09"];
+    eventBus.on<MyEvent>().listen((MyEvent data) {
+      var mdata = data.items;
+      setState(() {
+        nums = mdata['codeNumber'];
+        lottery = mdata['lottery'];
+      });
+    });
   }
 
   Widget numsList() {
@@ -45,15 +53,17 @@ class _NearestNumState extends State<NearestNum> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('第19047期  2019年04月27日'),
-          numsList(),
-        ],
-      ),
-    );
+    return nums == null
+        ? Center(child: CircularProgressIndicator())
+        : Container(
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('第${lottery['term']}期  ${lottery['openTime_fmt']}'),
+                numsList(),
+              ],
+            ),
+          );
   }
 }

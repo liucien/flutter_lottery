@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './all/nearest_num.dart';
+import './all/past_nums.dart';
 
 class AllMsg extends StatefulWidget {
   @override
@@ -7,6 +8,37 @@ class AllMsg extends StatefulWidget {
 }
 
 class _AllMsgState extends State<AllMsg> {
+  //黑边
+  _divBorder() {
+    return Container(
+      height: 8,
+      color: Colors.black12,
+    );
+  }
+
+  _imgsWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Image.asset(
+          'assets/images/tb.jpg',
+          width: 120,
+          height: 120,
+        ),
+        Image.asset(
+          'assets/images/fx.jpg',
+          width: 120,
+          height: 120,
+        ),
+        Image.asset(
+          'assets/images/wq.jpg',
+          width: 120,
+          height: 120,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,36 +50,12 @@ class _AllMsgState extends State<AllMsg> {
             padding: EdgeInsets.all(10),
             child: Text('开奖时间  每周一、三、六 20：30'),
           ),
-          Container(height: 8, color: Colors.black12),
+          _divBorder(),
           NearestNum(), //最近开奖
-          Container(
-            height: 8,
-            color: Colors.black12,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/images/tb.jpg',
-                width: 120,
-                height: 120,
-              ),
-              Image.asset(
-                'assets/images/fx.jpg',
-                width: 120,
-                height: 120,
-              ),
-              Image.asset(
-                'assets/images/wq.jpg',
-                width: 120,
-                height: 120,
-              ),
-            ],
-          ),
-          Container(
-            height: 8,
-            color: Colors.black12,
-          ),
+          _divBorder(),
+          _imgsWidget(),
+          _divBorder(),
+          PastNums()
         ],
       ),
     );
