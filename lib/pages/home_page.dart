@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
           title: TabBar(
             tabs: [
               Tab(text: '全国'),
-              Tab(text: '地方'),
+              // Tab(text: '地方'),
             ],
             indicatorColor: Color(0xffe73030),
             isScrollable:true,
